@@ -1,7 +1,5 @@
 local string_len = string.len
 local string_sub = string.sub
-local resty_str = require("resty.string")
-local resty_sha1 = require("resty.sha1")
 
 local _M = {}
 
@@ -15,22 +13,6 @@ function _M.get_nodes(endpoints)
   end
 
   return nodes
-end
-
-local function hash_digest(hash_factory, message)
-  local hash = hash_factory:new()
-  if not hash then
-    return nil, "failed to create object"
-  end
-  local ok = hash:update(message)
-  if not ok then
-    return nil, "failed to add data"
-  end
-  local binary_digest = hash:final()
-  if binary_digest == nil then
-    return nil, "failed to create digest"
-  end
-  return resty_str.to_hex(binary_digest), nil
 end
 
 -- given an Nginx variable i.e $request_uri

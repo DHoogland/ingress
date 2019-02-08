@@ -67,7 +67,7 @@ function _M.balance(self)
 
   local key = cookie:get(self.cookie_name)
   if not key then
-    local key = string.format("%s.%s.%s", ngx.now(), ngx.worker.pid(), math.random(999999))
+    key = string.format("%s.%s.%s", ngx.now(), ngx.worker.pid(), math.random(999999))
 
     if self.cookie_locations then
       local locs = self.cookie_locations[ngx.var.host]
